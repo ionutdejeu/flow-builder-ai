@@ -1,50 +1,20 @@
 {
-  "name": "react-flow-builder",
-  "version": "2.8.0",
-  "keywords": [
-    "flow",
-    "builder",
-    "process",
-    "react"
-  ],
+  "name": "flow-builder-ai",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "start": "dumi dev",
-    "docs:build": "dumi build",
-    "docs:deploy": "gh-pages -d docs-dist",
-    "build": "father-build",
-    "deploy": "npm run docs:build && npm run docs:deploy",
-    "release": "npm run build && npm publish",
-    "release-alpha": "npm run build && npm publish --tag alpha",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
-  "bugs": {
-    "url": "https://github.com/bytedance/flow-builder/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bytedance/flow-builder"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
-  },
-  "peerDependencies": {
-    "react": ">=16",
-    "react-dom": ">=16"
-  },
-  "devDependencies": {
+  "dependencies": {
+    "@react-router/node": "^7.5.3",
+    "@react-router/serve": "^7.5.3",
+    "isbot": "^5.1.27",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.5.3",
     "@arco-design/web-react": "^2.46.2",
     "@types/lodash.clonedeep": "^4.5.7",
     "@types/lodash.get": "^4.4.6",
@@ -52,23 +22,25 @@
     "@types/uuid": "^8.3.1",
     "@umijs/test": "^3.0.5",
     "antd": "^3 || ^4",
-    "babel-plugin-import": "^1.13.3",
-    "dumi": "^1.1.23",
-    "dumi-theme-default": "^1.1.24",
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
-    "prettier": "^2.2.1",
-    "react": ">=16",
-    "react-dom": ">=16",
-    "react-flow-builder": "2.8.0",
-    "yorkie": "^2.0.0"
-  },
-  "dependencies": {
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
+    "prettier": "^2.2.1",
     "react-beautiful-dnd": "^13.1.1",
-    "systemjs": "^6.12.1",
-    "uuid": "^8.3.2"
+    "uuid": "^11.1.0",
+    "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.5.3",
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/node": "^20",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.3",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
