@@ -72,9 +72,9 @@ const Builder = forwardRef<IFlowBuilderMethod>((props, ref) => {
     [registerNodes, selectedNode],
   );
 
-  const configComponentRef = useRef<any>();
+  const configComponentRef = useRef<any>(null);
 
-  const builderDomRef = useRef<any>();
+  const builderDomRef = useRef<any>(null);
 
   const mouseMoveData = useRef<any>(null);
 
