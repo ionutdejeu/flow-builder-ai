@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
-import { NodeForm } from "~/demo/node/form";
+import "../demo/node/form/index.css";
+import { Dragdrop } from "~/demo/dragdrop";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,8 +8,7 @@ export function meta({}: Route.MetaArgs) {
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
-
-export default function Home() {
-  return <Welcome />;
-}
  
+export default function Form() {
+  return <Dragdrop />;
+}

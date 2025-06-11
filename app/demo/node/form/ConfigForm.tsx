@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BuilderContext, useDrawer } from 'react-flow-builder';
+import { BuilderContext, useDrawer } from '../../../flow-builder';
 import { Form, Button, Input } from 'antd';
 
 const ConfigForm: React.FC = () => {
@@ -21,15 +21,15 @@ const ConfigForm: React.FC = () => {
 
   return (
     <div>
-      <Form form={form} initialValues={node.data || { name: node.name }}>
+      <Form form={form} initialValues={node?.data || { name: node?.name }}>
         <Form.Item name="name" label="Name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
       </Form>
       <div>
-        <Button onClick={cancel}>取消</Button>
+        <Button onClick={cancel}>Cancel</Button>
         <Button type="primary" onClick={handleSubmit}>
-          确定
+          Save
         </Button>
       </div>
     </div>

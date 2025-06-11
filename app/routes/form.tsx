@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import "../demo/node/form/index.css";
 import { NodeForm } from "~/demo/node/form";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,8 +8,7 @@ export function meta({}: Route.MetaArgs) {
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
-
-export default function Home() {
-  return <Welcome />;
-}
  
+export default function Form() {
+  return <NodeForm />;
+}
