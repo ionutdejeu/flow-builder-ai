@@ -12,7 +12,9 @@ import {
 } from '../../antd';
 
 import './index.css';
-
+import CodeMirrorForm from './CodeMirrorForm';
+import { JsonEditor, githubDarkTheme, type JsonData, type UpdateFunctionProps } from 'json-edit-react'
+ 
 const StartNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return <div className="start-node">{node.name}</div>;
@@ -27,11 +29,28 @@ const NodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return (
     <div
-      className={`other-node ${node.configuring ? 'node-configuring' : ''} ${
-        node.validateStatusError ? 'node-status-error' : ''
-      }`}
+      className={`other-node ${node.configuring ? 'node-configuring' : ''} ${node.validateStatusError ? 'node-status-error' : ''
+        }`}
     >
       {node.data ? node.data.name : node.name}
+    </div>
+  );
+};
+
+const NodeJsonDisplay: React.FC = () => {
+  const node = useContext(NodeContext);
+  return (
+    <div
+      className={`other-node ${node.configuring ? 'node-configuring' : ''} ${node.validateStatusError ? 'node-status-error' : ''
+        }`}
+    >
+      {node.data ? node.data.name : node.name}
+      <JsonEditor 
+        data={node.data}
+        viewOnly={true}
+        rootName=''
+        rootFontSize={10}
+      ></JsonEditor>
     </div>
   );
 };
@@ -40,14 +59,26 @@ const ConditionNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return (
     <div
-      className={`condition-node ${
-        node.configuring ? 'node-configuring' : ''
-      } ${node.validateStatusError ? 'node-status-error' : ''}`}
+      className={`condition-node ${node.configuring ? 'node-configuring' : ''
+        } ${node.validateStatusError ? 'node-status-error' : ''}`}
     >
       {node.data ? node.data.name : node.name}
     </div>
   );
 };
+
+const JsonNode: React.FC = () => {
+  const node = useContext(NodeContext);
+  return (
+    <div
+      className={`condition-node ${node.configuring ? 'node-configuring' : ''
+        } ${node.validateStatusError ? 'node-status-error' : ''}`}
+    >
+      {node.data ? JSON.stringify(node.data) : node.name}
+    </div>
+  );
+};
+
 
 const registerNodes: IRegisterNode[] = [
   {
@@ -61,6 +92,12 @@ const registerNodes: IRegisterNode[] = [
     name: 'End Node',
     displayComponent: EndNodeDisplay,
     isEnd: true,
+  },
+  {
+    type: 'json',
+    name: 'Json Node',
+    displayComponent: NodeJsonDisplay,
+    configComponent: CodeMirrorForm
   },
   {
     type: 'node',
@@ -130,6 +167,22 @@ const defaultNodes = [
     path: ['2'],
   },
   {
+    id: 'node-972401ca-c4db-4268-8780-5607876d8272',
+    type: 'json',
+    name: 'Json Node Test',
+    data: {
+      "default": [
+        "krisztian.papp@qubiz.com"
+      ],
+      "rbm-beta": [
+        "ionut.sabau@qubiz.com"
+      ],
+      "hayu": [
+      ]
+    },
+    path: ['2'],
+  },
+  {
     id: 'node-b106675a-5148-4a2e-aa86-8e06abd692d1',
     type: 'end',
     name: 'end',
@@ -157,7 +210,8 @@ export const NodeForm = () => {
         PopoverComponent={PopoverComponent}
         PopconfirmComponent={PopconfirmComponent}
       />
+
     </>
   );
 };
- 
+
