@@ -71,12 +71,20 @@ export interface IRegisterRemoteNode {
   cssUrl?: string;
 }
 
+
+export interface IRelation {
+  id:string;
+  fromId:string;
+  toId:string;
+  data?:any;
+}
 export interface INode {
   id: string;
   type: string;
   name: string;
   data?: any;
   children?: INode[];
+  relations?:IRelation[];
   path?: string[];
   configuring?: boolean;
   validateStatusError?: boolean;
@@ -109,7 +117,7 @@ export interface IDrawerComponent {
 }
 
 export interface IPopoverComponent {
-  visible: any;
+  open:any;
   onVisibleChange: any;
   overlayClassName: any;
   placement: any;

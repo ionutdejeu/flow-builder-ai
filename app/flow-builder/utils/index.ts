@@ -5,6 +5,7 @@ import type {
   IRegisterRemoteNode,
   AbstractNodeType,
   INode,
+  IRelation,
 } from '../index';
 
 export const createUuid = (prefix?: string) => {
@@ -94,26 +95,26 @@ export const createNewNode = (
 
   const extraProps: any = isBranchNode
     ? {
-        children: [
-          createNewNode(
-            registerNodes,
-            registerNode.conditionNodeType,
-            customCreateUuid,
-          ),
-          createNewNode(
-            registerNodes,
-            registerNode.conditionNodeType,
-            customCreateUuid,
-          ),
-        ],
-        ...initialNodeData,
-      }
+      children: [
+        createNewNode(
+          registerNodes,
+          registerNode.conditionNodeType,
+          customCreateUuid,
+        ),
+        createNewNode(
+          registerNodes,
+          registerNode.conditionNodeType,
+          customCreateUuid,
+        ),
+      ],
+      ...initialNodeData,
+    }
     : isConditionNode || isLoopNode
-    ? {
+      ? {
         children: [],
         ...initialNodeData,
       }
-    : initialNodeData;
+      : initialNodeData;
 
   return {
     id: customCreateUuid(type),
@@ -276,6 +277,34 @@ const computeChildrenPath = (children: INode[], parentPath: string[]) => {
   }
 };
 
+export const getNodeById = (nodeIdToFind:string, allNodes:INode[])=>{
+  return allNodes.find(n=>n.id == nodeIdToFind);
+}
+
+export const getChildNodesBasedOnRelations = (currentNode: INode,allNodes:INode[], relations: IRelation[])=>{
+  const childNodes:INode[] = [];
+  for (let index = 0; index < relations.length; index++) {
+    const relation = relations[index];
+    if(relation.fromId == currentNode.id){
+      const targeNode = getNodeById(relation.toId,allNodes);
+      if(targeNode)
+        childNodes.push(targeNode);
+    }
+  }
+  return childNodes;
+}
+export const computeNodesPathWithRelations = (nodes: INode[], relations: IRelation[]) => {
+  for (let index = 0; index < nodes.length; index++) {
+    const node = nodes[index];
+
+    node.path = [String(index)];
+
+    if (Array.isArray(node.children) && node.children.length > 0) {
+      computeChildrenPath(node.children, node.path);
+    }
+  }
+  return nodes;
+}
 export const computeNodesPath = (nodes: INode[]) => {
   for (let index = 0; index < nodes.length; index++) {
     const node = nodes[index];

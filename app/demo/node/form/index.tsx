@@ -3,6 +3,7 @@ import FlowBuilder, {
   NodeContext,
   type INode,
   type IRegisterNode,
+  type IRelation,
 } from '../../../flow-builder';
 import ConfigForm from './ConfigForm';
 import {
@@ -14,7 +15,7 @@ import {
 import './index.css';
 import CodeMirrorForm from './CodeMirrorForm';
 import { JsonEditor, githubDarkTheme, type JsonData, type UpdateFunctionProps } from 'json-edit-react'
- 
+
 const StartNodeDisplay: React.FC = () => {
   const node = useContext(NodeContext);
   return <div className="start-node">{node.name}</div>;
@@ -45,7 +46,7 @@ const NodeJsonDisplay: React.FC = () => {
         }`}
     >
       {node.data ? node.data.name : node.name}
-      <JsonEditor 
+      <JsonEditor
         data={node.data}
         viewOnly={true}
         rootName=''
@@ -124,6 +125,10 @@ const registerNodes: IRegisterNode[] = [
   },
 ];
 
+
+const relations:IRelation[] = [
+    
+]
 const defaultNodes = [
   {
     id: 'node-0d9d4733-e48c-41fd-a41f-d93cc4718d97',
@@ -171,16 +176,18 @@ const defaultNodes = [
     type: 'json',
     name: 'Json Node Test',
     data: {
-      "default": [
-        "krisztian.papp@qubiz.com"
-      ],
-      "rbm-beta": [
-        "ionut.sabau@qubiz.com"
-      ],
-      "hayu": [
-      ]
-    },
-    path: ['2'],
+      content: {
+        "default": [
+          "krisztian.papp@qubiz.com"
+        ],
+        "rbm-beta": [
+          "ionut.sabau@qubiz.com"
+        ],
+        "hayu": [
+        ]
+      },
+      path: ['2'],
+    }
   },
   {
     id: 'node-b106675a-5148-4a2e-aa86-8e06abd692d1',

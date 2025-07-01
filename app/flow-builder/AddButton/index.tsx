@@ -109,7 +109,7 @@ const AddNodeButton: React.FC<IProps> = (props) => {
           <DropComponent onDrop={handleDrop} />
         ) : PopoverComponent ? (
           <PopoverComponent
-            visible={visible}
+            open={visible}
             onVisibleChange={setVisible}
             overlayClassName="flow-builder-addable-nodes"
             placement="rightTop"

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { BuilderContext, useDrawer } from '../../../flow-builder';
 import { Form, Button, Input } from 'antd';
-import JsonEditor from './CodeMirrorFormControlWrapper';
 import JsonEditorReact from './CodeJsonEditorReactWrapper';
 
 const CodeMirrorForm: React.FC = () => {
@@ -23,12 +22,12 @@ const CodeMirrorForm: React.FC = () => {
  
   return (
     <div>
-      <Form form={form} initialValues={{ ...node }}>
+      <Form form={form} initialValues={{ ...node?.data }}>
         <Form.Item name="name" label="Name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name="data" label="Data" rules={[{ required: true }]}>
-          <JsonEditorReact value={node?.data}></JsonEditorReact>
+        <Form.Item name="content" label="Content" rules={[{ required: true }]}>
+          <JsonEditorReact></JsonEditorReact>
         </Form.Item>
       </Form>
       <div>
